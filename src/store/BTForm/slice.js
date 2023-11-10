@@ -32,13 +32,12 @@ const BTFormSlice = createSlice({
       const productIndex = state.productList.findIndex(
         (item) => item.maSV === payload.maSV
       );
-      if (productIndex==-1) {
+      if (productIndex == -1) {
         state.productList.push(payload);
+      } else {
+        alert("Mã sinh viên đã tồn tại, xin vui lòng nhập lại");
+        return;
       }
-      else{
-      alert('Mã sinh viên đã tồn tại, xin vui lòng nhập lại')
-        return
-      } 
     },
     deleteProduct: (state, { payload }) => {
       state.productList = state.productList.filter(
@@ -52,21 +51,26 @@ const BTFormSlice = createSlice({
       const productIndex = state.productList.findIndex(
         (item) => item.maSV === payload.maSV
       );
+
       if (productIndex !== -1) {
         state.productList[productIndex] = payload;
+        state.productList.forEach((e) => {
+          e.name = e.name.trim();
+        });
+
         state.productEdit = undefined;
       }
     },
     findProduct: (state, { payload }) => {
       const productIndex = state.productList.findIndex(
-        (item) => item.name == payload
+        (item) => item.name === payload
       );
-      if (productIndex==-1) {
-        alert('Không tìm thấy sinh viên trong danh sách')
-        return
+      if (productIndex == -1) {
+        alert("Không tìm thấy sinh viên trong danh sách");
+        return;
       }
       state.productList = state.productList.filter(
-        (value) => value.name == payload
+        (value) => value.name === payload
       );
     },
   },

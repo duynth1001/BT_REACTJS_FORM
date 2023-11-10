@@ -6,7 +6,6 @@ import { btFormActions } from '../store/BTForm/slice'
 export const ProductTable = () => {
     const { productList } = useSelector((state) => state.btForm)
     const dispatch = useDispatch()
-
     return (
         <div className="mt-5">
             <table className="table">

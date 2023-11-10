@@ -84,9 +84,7 @@ export const ProductForm = () => {
     if (productEdit) {
       setFormValue(productEdit);
     }
-    if (searchValue) {
-      setSearchValue(searchValue);
-    }
+
   }, [productEdit]);
 
   return (
@@ -96,11 +94,10 @@ export const ProductForm = () => {
         id="btForm"
         onSubmit={(ev) => {
           // ngăn sự kiện reload của browser
-
           ev.preventDefault();
           const validationError = {};
           Object.keys(formValue).forEach((name) => {
-            const error = validate(name, formValue[name]); // Vui lòng nhập thông tin || ""
+            const error = validate(name, formValue[name]); 
             if (error && error.length > 0) {
               validationError[name] = error;
             }
@@ -122,6 +119,12 @@ export const ProductForm = () => {
             });
           } else {
             dispatch(btFormActions.addProduct(formValue));
+            setFormValue({
+              maSV: "",
+              name: "",
+              phone: "",
+              email: "",
+            });
           }
         }}
       >
